@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="styles4.css">
+</head>
+<body>
+    <!-- Payment Page Container -->
+    <div class="payment-container">
+        <!-- Order Summary Section -->
+        
+
+        <!-- Payment Method Section -->
+        <section class="payment-method">
+            <h2>Payment Method</h2>
+            <form>
+                <label>
+                    <input type="radio" name="payment-method" value="credit-card">
+                    Credit/Debit Card
+                </label>
+                <label>
+                    <input type="radio" name="payment-method" value="paypal">
+                    PayPal
+                </label>
+                <label>
+                    <input type="radio" name="payment-method" value="bank-transfer">
+                    Bank Transfer
+                </label>
+            </form>
+        </section>
+
+        <!-- Payment Details Section -->
+        <section class="payment-details">
+            <h2>Payment Details</h2>
+            <form>
+                <label>
+                    Card Number:
+                    <input type="text" name="card-number">
+                </label>
+                <label>
+                    Expiration Date:
+                    <input type="date" name="expiration-date">
+                </label>
+                <label>
+                    CVV:
+                    <input type="text" name="cvv">
+                </label>
+                <label>
+                    Name on Card:
+                    <input type="text" name="name-on-card">
+                </label>
+            </form>
+        </section>
+
+        <!-- Pay Now Button -->
+        <button class="pay-now-btn">Pay Now</button>
+    </div>
+
+    <script src="payment1.js"></script>
+</body>
+</html>

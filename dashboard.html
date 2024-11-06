@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing E-commerce</title>
+    <link rel="stylesheet" href="dashboard1.css">
+    <script src="dashboard11.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Clothing Store</h1>
+        <div id="cart">
+            <button id="cartButton">Cart (<span id="cartCount">0</span>)</button>
+            <a href="logout.html"><button id="logout">logout</button></a>
+        </div>
+    </header>
+    <main>
+        <div class="product" data-name="Formal Suit" data-price="19.99">
+            <img src="https://th.bing.com/th/id/OIP.Mmu9qaUO6o1M69sIeb-k2wAAAA?w=474&h=474&rs=1&pid=ImgDetMain" alt="SUIT" style="width:200px">
+            <h2>Formal Suit</h2>
+            <p>Price: $19.99</p>
+            <button class="addToCart">Add to Cart</button>
+            <a href="payment.html"><button class="order-now-btn">Order Now</button></a>
+        </div>
+        <div class="product" data-name="Womens Wear" data-price="39.99">
+            <img src="https://th.bing.com/th/id/R.45bd78d35e8b779059b730ac1a5e3548?rik=jy%2fYby97I3jDIQ&riu=http%3a%2f%2fpm1.aminoapps.com%2f8318%2fb9d369e07246c4c69051f40945a90232cd740a2br1-236-314v2_uhq.jpg&ehk=RD%2fGvDwUFJWResOL%2f8bp%2foSoKmdxmuQZBYa99jWp8T4%3d&risl=&pid=ImgRaw&r=0" alt="Product 2" style="width:150px;">
+            <h2>Womens Wear</h2>
+            <p>Price: $39.99</p>
+            <button class="addToCart">Add to Cart</button>
+            <a href="payment.html"><button class="order-now-btn">Order Now</button></a>
+        </div>
+        <div class="product" data-name="Sweat Shirt" data-price="59.99">
+            <img src="https://www.safetywearhouse.net/media/catalog/product/cache/5c38a67ae5b5ea86b028118b93c46b36/rdi/rdi/m-lsefit-hw-ls-pkt-tshrt-k126-y23_1.png" alt="Product 3" style="width: 200px;">
+            <h2>Sweat Shirt</h2>
+            <p>Price: $59.99</p>
+            <button class="addToCart">Add to Cart</button>
+            <a href="payment.html"><button class="order-now-btn">Order Now</button></a>
+        </div>
+    </main>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Your Cart</h2>
+            <ul id="cartItems"></ul>
+            <p id="totalPrice">Total: $0.00</p>
+        </div>
+    </div>
+</body>
+</html>
