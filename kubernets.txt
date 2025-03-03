@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: energy-monitoring
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: energy-monitoring
+  template:
+    metadata:
+      labels:
+        app: energy-monitoring
+    spec:
+      containers:
+        - name: energy-backend
+          image: myrepo/energy-monitoring:latest
+          ports:
+            - containerPort: 8080
