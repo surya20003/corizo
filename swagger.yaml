@@ -1,0 +1,271 @@
+openapi: 3.0.3
+info:
+  title: Employee Directory API
+  description: REST API for managing employees in the Employee Directory app.
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+    description: Local backend server
+tags:
+  - name: Employees
+    description: Employee management endpoints
+paths:
+  /api/employees:
+    get:
+      tags:
+        - Employees
+      summary: Get all employees
+      description: Returns all employees ordered by creation date, newest first.
+      responses:
+        "200":
+          description: List of employees
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Employee"
+              example:
+                data:
+                  - id: 1
+                    name: John Doe
+                    email: john@example.com
+                    position: Developer
+                    department: IT
+                    created_at: "2026-05-13 14:00:14"
+        "400":
+          $ref: "#/components/responses/ErrorResponse"
+    post:
+      tags:
+        - Employees
+      summary: Create a new employee
+      description: Adds a new employee to the database.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmployeeInput"
+            example:
+              name: John Doe
+              email: john@example.com
+              position: Developer
+              department: IT
+      responses:
+        "201":
+          description: Employee created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    $ref: "#/components/schemas/CreatedEmployee"
+              example:
+                message: Employee created successfully
+                data:
+                  id: 1
+                  name: John Doe
+                  email: john@example.com
+                  position: Developer
+                  department: IT
+        "400":
+          $ref: "#/components/responses/ErrorResponse"
+  /api/employees/{id}:
+    get:
+      tags:
+        - Employees
+      summary: Get one employee
+      description: Returns a single employee by ID.
+      parameters:
+        - $ref: "#/components/parameters/EmployeeId"
+      responses:
+        "200":
+          description: Employee found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Employee"
+              example:
+                data:
+                  id: 1
+                  name: John Doe
+                  email: john@example.com
+                  position: Developer
+                  department: IT
+                  created_at: "2026-05-13 14:00:14"
+        "400":
+          $ref: "#/components/responses/ErrorResponse"
+        "404":
+          $ref: "#/components/responses/ErrorResponse"
+    put:
+      tags:
+        - Employees
+      summary: Update an employee
+      description: Updates an existing employee. Fields are optional; only provided values are changed.
+      parameters:
+        - $ref: "#/components/parameters/EmployeeId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmployeeUpdate"
+            example:
+              name: John Smith
+              position: Senior Developer
+      responses:
+        "200":
+          description: Employee updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  changes:
+                    type: integer
+              example:
+                message: Employee updated successfully
+                changes: 1
+        "400":
+          $ref: "#/components/responses/ErrorResponse"
+        "404":
+          $ref: "#/components/responses/ErrorResponse"
+    delete:
+      tags:
+        - Employees
+      summary: Delete an employee
+      description: Deletes an employee by ID.
+      parameters:
+        - $ref: "#/components/parameters/EmployeeId"
+      responses:
+        "200":
+          description: Employee deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  changes:
+                    type: integer
+              example:
+                message: Employee deleted successfully
+                changes: 1
+        "400":
+          $ref: "#/components/responses/ErrorResponse"
+        "404":
+          $ref: "#/components/responses/ErrorResponse"
+components:
+  parameters:
+    EmployeeId:
+      name: id
+      in: path
+      required: true
+      description: Employee ID
+      schema:
+        type: integer
+        example: 1
+  schemas:
+    Employee:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          format: email
+          example: john@example.com
+        position:
+          type: string
+          example: Developer
+        department:
+          type: string
+          example: IT
+        created_at:
+          type: string
+          example: "2026-05-13 14:00:14"
+    CreatedEmployee:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          format: email
+          example: john@example.com
+        position:
+          type: string
+          example: Developer
+        department:
+          type: string
+          example: IT
+    EmployeeInput:
+      type: object
+      required:
+        - name
+        - email
+        - position
+        - department
+      properties:
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          format: email
+          example: john@example.com
+        position:
+          type: string
+          example: Developer
+        department:
+          type: string
+          example: IT
+    EmployeeUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John Smith
+        email:
+          type: string
+          format: email
+          example: john.smith@example.com
+        position:
+          type: string
+          example: Senior Developer
+        department:
+          type: string
+          example: Engineering
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Employee not found
+  responses:
+    ErrorResponse:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
